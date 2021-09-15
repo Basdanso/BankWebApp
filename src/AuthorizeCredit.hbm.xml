@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class name="co.basiru.AuthorizeCredit" table="authorize_credit">
+ <cache usage="read-only" />
+ <id name="id" column="Id">
+ <!-- <generator class="assigned"/> -->
+ 
+      <generator class = "increment" /> 
+ </id>
+ 
+  <property name="name" column="Name"/>
+  <property name="cardNumber" column="CardNumber"/>
+  <property name = "cvv" column = "CVV"/>
+  <property name="amount" column = "Amount"/>
+ 
+ </class>
+</hibernate-mapping>

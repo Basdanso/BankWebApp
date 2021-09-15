@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+<class name="co.basiru.Transactions" table="transactions">
+ <cache usage="read-only" />
+ <id name="id" column="Id">
+ <!-- <generator class="assigned"/> -->
+ 
+      <generator class = "increment" /> 
+ </id>
+ 
+  
+  <property name="acno" column="Acno"/>
+  <property name="amount" column="Amount"/>
+  <property name="balance" column="Balance"/>
+  <property name="date" column="Date"/>
+ 
+ </class>
+</hibernate-mapping>

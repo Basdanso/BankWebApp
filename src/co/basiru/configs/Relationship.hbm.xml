@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping>
+<class name="co.basiru.User" table="user_pass">
+ <cache usage="read-only" />
+ <id name="id" column="Id">
+ <!-- <generator class="assigned"/> -->
+ 
+      <generator class = "increment" /> 
+ </id>
+ 
+  <property name="username" column="username"/>
+  <property name="password" column="password"/>
+  <set name = "AccountDetails" cascade = "all" inverse = "true">
+  <key>
+    <column name="id"/>
+  </key>
+  <one-to-many class = "co.basiru.AccountDetails"/>
+  </set> 
+ 
+ </class>
+ 
+ <class name="co.basiru.AccountDetails" table="accountDetails">
+ <cache usage="read-only" />
+ <id name="id" column="Id">
+ <!-- <generator class="assigned"/> -->
+ 
+      <generator class = "increment" /> 
+ </id>
+ 
+  <property name="acno" column="Acno"/>
+  <property name="name" column="Name"/>
+  <property name="dob" column="DOB"/>
+  <property name="address" column="Address"/>
+  <property name="email" column="Email"/>
+  <property name="accType" column="AccType"/>
+  <many-to-one name="user" class = "co.basiru.user_pass">
+  <column name="id">
+  
+  </column>
+  </many-to-one>
+ 
+ </class>
+</hibernate-mapping>

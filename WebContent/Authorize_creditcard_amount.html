@@ -1,0 +1,59 @@
+<html>
+<head>
+
+<title>Authorize_creditcard_amount</title>
+
+<style>
+ body{
+   margin:0px;
+   background:teal;
+  }
+  
+  h2{
+  padding:10px;
+  text-align:center;
+  }
+  
+  input{
+  margin:0px 45px;
+  
+  }
+
+</style>
+</head>
+<body>
+<h2>Authorize Credit Card Transaction</h2>
+
+<form action ="authorize" method = "Get">
+
+<p>
+Name 
+<input type = text name = "name"   required>
+</p>
+
+<p>
+Card Number 
+<input type = text name = "cardNumber"  required>
+</p>
+
+<p>
+CVV2CVC2
+<INPUT type = text name="CVV2" required>
+</p>
+
+<p>
+Amount
+<INPUT type = text name="amount" required>
+</p>
+
+<br><br>
+
+<p>
+<input type="submit" value="Authorize">
+</p>
+
+</form>
+
+</body>
+
+</html>

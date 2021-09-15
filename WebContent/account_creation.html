@@ -1,0 +1,88 @@
+<html>
+<head>
+
+<title>User || a/c creation</title>
+
+<style>
+ body{
+   margin:0px;
+   background:teal;
+  }
+  #AccountCreation-form{
+  font-size:18px;
+  font-style:bold;
+  padding:10px;
+  margin:5px auto;
+  }
+
+  h1{
+  padding:10px;
+  text-align:center;
+  }
+  
+  input{
+  margin:0px 45px;
+  
+  }
+  
+  textarea{
+  padding:20px 30px 10px 30px;
+  margin:0px 90px;
+  }
+
+</style>
+</head>
+<body>
+<h1>Account creation Screen</h1>
+
+<form action ="register" method = "post">
+
+<p>
+AccNo
+<input type = text name = "acno"   required>
+</p>
+
+<p>
+Name 
+<input type = text name = "name"   required>
+</p>
+
+<p>
+DOB 
+<input type = text name = "DOB"  required>
+</p>
+
+<p>
+Address
+</p>
+<p> 
+<textarea id="address" name="address" rows="5" cols="30">
+</textarea>
+</p>
+
+<p>
+Email ID
+<input type = text name = "email"   required>       
+</p>
+
+
+
+<label for="accounts">Type Of account</label>
+
+<select name="accounts" id="accounts">
+<option value ="sb account">SB Account</option>
+<option value ="sv account">SG Account</option>
+<option value ="ct account">CT Account</option>
+</select>
+
+<br><br>
+
+<p>
+<input type="submit" value="Create Account">
+</p>
+
+</form>
+
+</body>
+
+</html>

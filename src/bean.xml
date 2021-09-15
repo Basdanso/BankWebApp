@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	     <context:annotation-config/> 
+	    <tx:annotation-driven/>  
+	
+	
+	<bean id="dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	   <property name="url" value="jdbc:mysql://localhost:3306/Edureka"/>
+	   <property name="username" value="root"/>
+	   <property name="password" value=""/>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	   <property name="dataSource" ref = "dataSource"></property>
+	   
+	   	   <property name="mappingResources">
+	   <list>
+	   <value>User.hbm.xml</value>
+	   <value>Transactions.hbm.xml</value>
+	   <value>AccountDetails.hbm.xml</value>
+	   </list>
+	   </property>
+	   
+	   	   <property name="hibernateProperties">
+	   <props>
+	   <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+       <prop key="hibernate.hbm2ddl.auto">update</prop> 
+	   <prop key="hibernate.show_sql">true</prop>
+	   <prop key="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform</prop>
+	   </props>
+	   
+	   </property>
+	</bean>
+	
+	<bean id="transactionManager" class= "org.springframework.orm.hibernate5.HibernateTransactionManager">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+		<bean id = "hibernateTemplate" class ="org.springframework.orm.hibernate5.HibernateTemplate">
+	    <property name = "sessionFactory" ref="sessionFactory"/>
+	    <property name="checkWriteOperations" value= "false"/>
+	    
+	 </bean>
+	 
+	 <bean id="Usrdao" class="co.basiru.UserDAOImpl">
+	     <property name="hibernateTemplate" ref="hibernateTemplate"/>
+	 </bean>
+
+	<bean id="User" class="co.basiru.User" lazy-init="true">
+		<property name="username" value=""/>
+		<property name="password" value=""/>
+	</bean>
+	
+	<bean id = "bank" class = "co.basiru.Bank"/>
+	<bean id = "log" class = "co.basiru.Bank" />
+	
+	<aop:config>
+		<aop:pointcut expression="execution(void co.basiru.Bank.*(..))"
+			id="bankpointcut" />
+		<aop:aspect id="logaspect" ref="log">
+			<aop:before method="log" pointcut-ref="bankpointcut" />
+		</aop:aspect>
+	</aop:config>
+	
+ <!--  	 <bean id="trnsdao" class="co.basiru.TransactionsDAOImpl">
+	     <property name="hibernateTemplate" ref="hibernateTemplate"/>
+	 </bean> -->
+	
+	<bean id="Transactions" class="co.basiru.Transactions">
+		
+		<property name="acno" value=""/>
+		<property name="amount" value=""/>
+		<property name="balance" value=""/>
+		<property name="date" value=""/>
+	</bean>
+	
+	 <bean id="accdtdao" class="co.basiru.AccountDetailsDAOImpl">
+	     <property name="hibernateTemplate" ref="hibernateTemplate"/>
+	 </bean>
+
+	<bean id="AccountDetails" class="co.basiru.AccountDetails">
+		<property name="acno" value=""/>
+		<property name="name" value=""/>
+		<property name="dob" value=""/>
+		<property name="address" value=""/>
+		<property name="email" value=""/>
+		<property name="accType" value=""/>
+	</bean>
+	
+	<bean id="authCreditdao" class="co.basiru.AuthorizeCreditDAOImpl">
+	    <property name="hibernateTemplate" ref="hibernateTemplate"/>
+	 </bean>
+
+	<bean id="AuthorizeCredit" class="co.basiru.AuthorizeCredit">
+        <property name="name" value=""/> 
+		<property name="cardNumber" value=""/>
+		<property name="cvv" value=""/>
+		<property name="amount" value=""/>
+	</bean>
+	
+</beans>
